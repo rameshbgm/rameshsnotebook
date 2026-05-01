@@ -18,3 +18,8 @@
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
 </IfModule>
+
+# Sitemap
+<IfModule mod_rewrite.c>
+    RewriteRule ^sitemap\.xml$ sitemap.xml [L]
+</IfModule>
