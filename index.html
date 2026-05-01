@@ -158,6 +158,34 @@ body::before {
 @media (max-width: 420px) {
   .tb-actions { display: none; }
 }
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 5px 7px;
+  cursor: pointer;
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.hamburger:hover { border-color: var(--accent); color: var(--accent); }
+.hamburger svg { width: 16px; height: 12px; display: block; }
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+}
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 150;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.sidebar-overlay.open { display: block; }
 .tb-dots { display: flex; gap: 8px; }
 .tb-dot { width: 12px; height: 12px; border-radius: 50%; }
 .tb-dot.r { background: #ff5f56; }
@@ -741,7 +769,17 @@ footer {
 /* Responsive */
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    width: 260px;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+  }
+  .sidebar.open { transform: translateX(0); }
   .ai-stack { grid-template-columns: 1fr; }
   .web-list { grid-template-columns: 1fr; }
   .hero { padding: 40px 20px; }
@@ -758,17 +796,25 @@ footer {
     <span class="tb-dot y"></span>
     <span class="tb-dot g"></span>
   </div>
+  <button type="button" class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+    <svg viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="0" y1="1" x2="16" y2="1"/>
+      <line x1="0" y1="6" x2="16" y2="6"/>
+      <line x1="0" y1="11" x2="16" y2="11"/>
+    </svg>
+  </button>
   <div class="tb-title">~/<span>rameshsnotebook</span> — zsh — 120×40</div>
   <div class="tb-actions">
     <a href="https://www.linkedin.com/in/rameshbgm/" class="tb-link" target="_blank" rel="noopener noreferrer">linkedin</a>
     <a href="https://github.com/rameshbgm/" class="tb-link" target="_blank" rel="noopener noreferrer">github</a>
   </div>
 </div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <div class="shell">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="sb-section">
       <div class="sb-heading">Notebook</div>
       <a href="#about" class="sb-item" data-icon="◉">about.md</a>
@@ -1414,6 +1460,37 @@ if (subtitle) {
   }, 600);
 }
 
+</script>
+
+<script>
+(function () {
+  const hamburger = document.getElementById('hamburger');
+  const sidebar   = document.getElementById('sidebar');
+  const overlay   = document.getElementById('sidebar-overlay');
+
+  function open() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', function () {
+    sidebar.classList.contains('open') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+
+  // Close when any sidebar link is tapped
+  sidebar.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+}());
 </script>
 
 </body>
