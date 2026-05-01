@@ -922,44 +922,27 @@ section {
 /* ── VERSION NAV ──────────────────────────────────── */
 .ver-nav {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
-  padding: 36px 60px 28px;
+  gap: 8px;
 }
 .ver-nav-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 18px 32px;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   border: 1.5px solid var(--line);
-  border-radius: 6px;
+  border-radius: 4px;
   background: transparent;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.2s;
   color: var(--ink);
   text-decoration: none;
-  font-family: var(--ff-mono);
-  opacity: 0.5;
+  opacity: 0.4;
 }
-.ver-nav-btn svg { width: 20px; height: 20px; }
-.ver-nav-btn span {
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.ver-nav-btn:hover {
-  border-color: var(--jade);
-  color: var(--jade);
-  opacity: 1;
-  transform: translateY(-3px);
-}
-.ver-nav-btn.active {
-  border-color: var(--jade);
-  color: var(--jade);
-  opacity: 1;
-}
+.ver-nav-btn svg { width: 13px; height: 13px; }
+.ver-nav-btn:hover { border-color: var(--jade); color: var(--jade); opacity: 1; }
+.ver-nav-btn.active { border-color: var(--jade); color: var(--jade); opacity: 1; }
 
 /* ── FOOTER ─────────────────────────────────────── */
 footer {
@@ -2068,23 +2051,20 @@ footer {
 
 <!-- ════════════════ FOOTER ════════════════ -->
 <footer>
-  <div class="ver-nav">
-    <a href="./ramesh_portfolio.html" class="ver-nav-btn active" title="Portfolio — Classic">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-      <span>Portfolio</span>
-    </a>
-    <a href="./ramesh_notebook_editorial.html" class="ver-nav-btn" title="v1.0 Editorial">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      <span>v1.0 Editorial</span>
-    </a>
-    <a href="./ramesh_notebook_terminal.html" class="ver-nav-btn" title="v2.0 Terminal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-      <span>v2.0 Terminal</span>
-    </a>
-  </div>
   <div class="footer-bottom">
     <div class="footer-brand">Ramesh's Notebook</div>
     <div class="footer-copy">© 2025 — Built with precision &amp; care</div>
+    <div class="ver-nav">
+      <a href="./ramesh_portfolio.html" class="ver-nav-btn active" title="Portfolio — Classic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      </a>
+      <a href="./ramesh_notebook_editorial.html" class="ver-nav-btn" title="v1.0 Editorial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </a>
+      <a href="./ramesh_notebook_terminal.html" class="ver-nav-btn" title="v2.0 Terminal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </a>
+    </div>
     <div class="footer-socials">
       <a href="https://www.linkedin.com/in/rameshbgm/" class="footer-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/rameshbgm/" class="footer-social" target="_blank" rel="noopener noreferrer">GitHub</a>
