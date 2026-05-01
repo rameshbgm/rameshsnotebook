@@ -10,13 +10,13 @@
     { text: '> ', cls: 'h' },
     { text: 'Senior ', cls: '' },
     { text: 'AI Engineer', cls: 'tw' },
-    { text: ' & Solution Architect. Building production-grade ', cls: '' },
+    { text: ' & Solution Architect. I build ', cls: '' },
     { text: 'agentic systems', cls: 'ta' },
     { text: ', ', cls: '' },
     { text: 'RAG pipelines', cls: 't2' },
-    { text: ', and ', cls: '' },
-    { text: 'multi-agent orchestration', cls: 't4' },
-    { text: ' platforms.', cls: '' }
+    { text: ' and ', cls: '' },
+    { text: 'multi-agent platforms', cls: 't4' },
+    { text: ' that actually work in production.', cls: '' }
   ];
 
   function typeSegments(el, segments, speed, onDone) {
