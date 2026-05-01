@@ -733,29 +733,6 @@ footer {
 .foot-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .foot-links a:hover { color: var(--accent); }
 
-/* ────── VERSION NAV ────── */
-.ver-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.ver-nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--muted);
-  text-decoration: none;
-}
-.ver-nav-btn svg { width: 12px; height: 12px; }
-.ver-nav-btn:hover { border-color: var(--accent); color: var(--accent); }
-.ver-nav-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0,255,156,0.06); }
 
 /* Reveal */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
@@ -1341,17 +1318,6 @@ footer {
 <footer>
   <div class="foot-bottom">
     <div>© 2025 Ramesh Maharaddi · rameshsnotebook.com · crafted in vim</div>
-    <div class="ver-nav">
-      <a href="./ramesh_portfolio.html" class="ver-nav-btn" title="Portfolio — Classic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-      </a>
-      <a href="./ramesh_notebook_editorial.html" class="ver-nav-btn" title="v1.0 Editorial">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      </a>
-      <a href="./ramesh_notebook_terminal.html" class="ver-nav-btn active" title="v2.0 Terminal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-      </a>
-    </div>
     <div class="foot-links">
       <a href="https://www.linkedin.com/in/rameshbgm/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://github.com/rameshbgm/" target="_blank" rel="noopener noreferrer">GitHub</a>

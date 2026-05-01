@@ -1,25 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-
-    # Random page on root visit — splits last digit of current second across 3 pages
-    # [0-3] = 40% editorial  [4-6] = 30% terminal  [7-9] = 30% portfolio
-    RewriteCond %{REQUEST_URI} ^/$
-    RewriteCond %{TIME_SEC}    [0-3]$
-    RewriteRule ^               ramesh_notebook_editorial.html [L]
-
-    RewriteCond %{REQUEST_URI} ^/$
-    RewriteCond %{TIME_SEC}    [4-6]$
-    RewriteRule ^               ramesh_notebook_terminal.html [L]
-
-    RewriteCond %{REQUEST_URI} ^/$
-    RewriteRule ^               ramesh_portfolio.html [L]
+    RewriteRule ^$ index.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
-</IfModule>
-
-# Sitemap
-<IfModule mod_rewrite.c>
-    RewriteRule ^sitemap\.xml$ sitemap.xml [L]
 </IfModule>
