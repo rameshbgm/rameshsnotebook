@@ -1,27 +1,13 @@
-// Typing effect on hero name (single-line matrix style)
-(function typeHeroName() {
+// Sequenced typing: hero name first, then subtitle
+(function typeHeroSequence() {
   const title = document.getElementById('hero-name');
-  if (!title) return;
-  const text = title.getAttribute('data-text') || 'Ramesh Maharaddi';
-  title.textContent = '';
-  let i = 0;
-  const speed = 85;
-
-  function tick() {
-    if (i >= text.length) return;
-    title.textContent += text[i];
-    i++;
-    setTimeout(tick, speed);
-  }
-
-  setTimeout(tick, 240);
-})();
-
-// Typing effect on hero subtitle
-(function typeHero() {
   const target = document.getElementById('typed-target');
-  if (!target) return;
-  const segments = [
+  const subtitle = document.getElementById('typed-subtitle');
+  if (!title || !target || !subtitle) return;
+
+  const nameText = title.getAttribute('data-text') || 'Ramesh Maharaddi';
+  const subtitleSegments = [
+    { text: '> ', cls: 'h' },
     { text: 'Senior ', cls: '' },
     { text: 'AI Engineer', cls: 'tw' },
     { text: ' & Solution Architect. Building production-grade ', cls: '' },
@@ -33,38 +19,62 @@
     { text: ' platforms.', cls: '' }
   ];
 
-  const flat = [];
-  segments.forEach(s => {
-    for (const ch of s.text) flat.push({ ch, cls: s.cls });
-  });
+  function typeSegments(el, segments, speed, onDone) {
+    const flat = [];
+    segments.forEach(s => {
+      for (const ch of s.text) flat.push({ ch, cls: s.cls || '' });
+    });
 
-  let i = 0;
-  let currentSpan = null;
-  let currentCls = null;
-  const speed = 18; // ms per char
+    let i = 0;
+    let currentSpan = null;
+    let currentCls = null;
 
-  function tick() {
-    if (i >= flat.length) {
-      const caret = document.querySelector('.type-caret');
-      if (caret) caret.classList.add('done');
-      return;
+    function tick() {
+      if (i >= flat.length) {
+        if (onDone) onDone();
+        return;
+      }
+      const { ch, cls } = flat[i];
+      if (cls !== currentCls || !currentSpan) {
+        currentSpan = document.createElement('span');
+        if (cls) currentSpan.className = cls;
+        el.appendChild(currentSpan);
+        currentCls = cls;
+      }
+      currentSpan.textContent += ch;
+      i++;
+      const delay = (ch === '.' || ch === ',') ? speed * 4 : speed;
+      setTimeout(tick, delay);
     }
-    const { ch, cls } = flat[i];
-    if (cls !== currentCls || !currentSpan) {
-      currentSpan = document.createElement('span');
-      if (cls) currentSpan.className = cls;
-      target.appendChild(currentSpan);
-      currentCls = cls;
-    }
-    currentSpan.textContent += ch;
-    i++;
-    // pause longer on punctuation for natural feel
-    const delay = (ch === '.' || ch === ',') ? speed * 6 : speed;
-    setTimeout(tick, delay);
+
+    tick();
   }
 
-  // small initial delay so it feels intentional
-  setTimeout(tick, 600);
+  title.textContent = '';
+  target.textContent = '';
+  subtitle.style.opacity = '0';
+
+  setTimeout(() => {
+    typeSegments(
+      title,
+      [{ text: nameText, cls: '' }],
+      26,
+      () => {
+        const returnIcon = document.createElement('span');
+        returnIcon.className = 'hero-return';
+        returnIcon.textContent = ' ↵';
+        title.appendChild(returnIcon);
+
+        setTimeout(() => {
+          subtitle.style.opacity = '1';
+          typeSegments(target, subtitleSegments, 26, () => {
+            const caret = document.querySelector('.type-caret');
+            if (caret) caret.classList.add('done');
+          });
+        }, 320);
+      }
+    );
+  }, 450);
 })();
 
 // Measure titlebar height and set CSS var so tabs stick exactly below it
@@ -90,16 +100,6 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 reveal.forEach(r => io.observe(r));
 
-
-// Type effect on hero subtitle (light)
-const subtitle = document.querySelector('.hero-subtitle');
-if (subtitle) {
-  subtitle.style.opacity = '0';
-  setTimeout(() => {
-    subtitle.style.transition = 'opacity 1.2s';
-    subtitle.style.opacity = '1';
-  }, 600);
-}
 
 (function () {
   const hamburger = document.getElementById('hamburger');
