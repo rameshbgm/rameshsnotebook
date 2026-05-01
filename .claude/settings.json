@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(composer install *)",
+      "Bash(npm run *)",
+      "Bash(php artisan *)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot",
+      "Read(//var/folders/kh/86_3cbdx6p5_ql3n23vhc4k80000gn/T/chrome-devtools-mcp-KyMFIa/**)",
+      "Read(//private/var/folders/kh/86_3cbdx6p5_ql3n23vhc4k80000gn/T/chrome-devtools-mcp-KyMFIa/**)"
+    ]
+  }
+}

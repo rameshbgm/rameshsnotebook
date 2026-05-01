@@ -657,68 +657,62 @@ section.block {
 
 /* ────── FOOTER ────── */
 footer {
-  padding: 24px 40px;
   border-top: 1px solid var(--line);
   background: var(--bg2);
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
   font-size: 11px;
   color: var(--muted);
+}
+.foot-bottom {
+  padding: 20px 40px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
 }
 .foot-links { display: flex; gap: 16px; flex-wrap: wrap; }
 .foot-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .foot-links a:hover { color: var(--accent); }
 
-/* Reveal */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
-.reveal.show { opacity: 1; transform: translateY(0); }
-
-/* ────── VERSION SELECTOR ────── */
-.titlebar-controls {
+/* ────── VERSION NAV ────── */
+.ver-nav {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 16px;
+  padding: 28px 40px 20px;
+  border-bottom: 1px solid var(--line);
 }
-.version-selector {
-  position: relative;
+.ver-nav-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 8px;
-}
-.version-label {
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 600;
-}
-.version-dropdown {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text);
-  background: var(--bg);
+  padding: 14px 24px;
   border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 4px 8px;
+  border-radius: 4px;
+  background: transparent;
   cursor: pointer;
   transition: all 0.2s;
-  font-weight: 400;
-  appearance: none;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--ff-mono);
 }
-.version-dropdown:hover {
+.ver-nav-btn svg { width: 18px; height: 18px; }
+.ver-nav-btn span {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ver-nav-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
-.version-dropdown:focus {
-  outline: none;
+.ver-nav-btn.active {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(0, 255, 156, 0.1);
+  color: var(--accent);
+  background: rgba(0, 255, 156, 0.06);
 }
-.version-dropdown option {
-  color: var(--text);
-  background: var(--bg);
-}
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+.reveal.show { opacity: 1; transform: translateY(0); }
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -742,13 +736,6 @@ footer {
   </div>
   <div class="tb-title">~/<span>rameshsnotebook</span> — zsh — 120×40</div>
   <div class="tb-actions">
-    <div class="version-selector">
-      <label for="versionSwitch" class="version-label">ver</label>
-      <select id="versionSwitch" class="version-dropdown" title="Switch between portfolio versions">
-        <option value="editorial">v1.0 editorial</option>
-        <option value="terminal">v2.0 terminal</option>
-      </select>
-    </div>
     <a href="https://www.linkedin.com/in/rameshbgm/" class="tb-link" target="_blank" rel="noopener noreferrer">linkedin</a>
     <a href="https://github.com/rameshbgm/" class="tb-link" target="_blank" rel="noopener noreferrer">github</a>
   </div>
@@ -1305,14 +1292,30 @@ footer {
 </div>
 
 <footer>
-  <div>© 2025 Ramesh Maharaddi · rameshsnotebook.com · crafted in vim</div>
-  <div class="foot-links">
-    <a href="https://www.linkedin.com/in/rameshbgm/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://github.com/rameshbgm/" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="https://mydevtools.in/" target="_blank" rel="noopener noreferrer">MyDevTools</a>
-    <a href="https://tinycut.in/" target="_blank" rel="noopener noreferrer">TinyCut</a>
-    <a href="https://belgaum.today/" target="_blank" rel="noopener noreferrer">Belgaum Today</a>
-    <a href="https://appliedagentic.in/" target="_blank" rel="noopener noreferrer">Applied Agentic</a>
+  <div class="ver-nav">
+    <a href="./ramesh_portfolio.html" class="ver-nav-btn" title="Portfolio — Classic">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      <span>portfolio</span>
+    </a>
+    <a href="./ramesh_notebook_editorial.html" class="ver-nav-btn" title="v1.0 Editorial">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <span>v1.0 editorial</span>
+    </a>
+    <a href="./ramesh_notebook_terminal.html" class="ver-nav-btn active" title="v2.0 Terminal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      <span>v2.0 terminal</span>
+    </a>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2025 Ramesh Maharaddi · rameshsnotebook.com · crafted in vim</div>
+    <div class="foot-links">
+      <a href="https://www.linkedin.com/in/rameshbgm/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/rameshbgm/" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://mydevtools.in/" target="_blank" rel="noopener noreferrer">MyDevTools</a>
+      <a href="https://tinycut.in/" target="_blank" rel="noopener noreferrer">TinyCut</a>
+      <a href="https://belgaum.today/" target="_blank" rel="noopener noreferrer">Belgaum Today</a>
+      <a href="https://appliedagentic.in/" target="_blank" rel="noopener noreferrer">Applied Agentic</a>
+    </div>
   </div>
 </footer>
 
@@ -1401,32 +1404,6 @@ if (subtitle) {
   }, 600);
 }
 
-// Version Selector
-document.addEventListener('DOMContentLoaded', () => {
-  const versionSwitch = document.getElementById('versionSwitch');
-  if (!versionSwitch) return;
-
-  // Set current version
-  versionSwitch.value = 'terminal';
-
-  // Handle version change
-  versionSwitch.addEventListener('change', (e) => {
-    const version = e.target.value;
-    localStorage.setItem('notebookVersion', version);
-
-    if (version === 'editorial') {
-      window.location.href = './ramesh_notebook_editorial.html';
-    } else {
-      window.location.href = './ramesh_notebook_terminal.html';
-    }
-  });
-
-  // Restore saved preference if switching back
-  const savedVersion = localStorage.getItem('notebookVersion');
-  if (savedVersion && savedVersion !== 'terminal') {
-    versionSwitch.value = savedVersion;
-  }
-});
 </script>
 
 </body>
