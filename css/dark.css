@@ -672,6 +672,25 @@ section.block {
 .stack-list li::before { content: '→'; color: var(--accent); font-size: 11px; }
 .stack-list li:last-child { border-bottom: none; }
 
+/* ====== AI STACK ANIMATION ====== */
+.ai-stack .stack-col:nth-child(1) { transition-delay: 0.00s; }
+.ai-stack .stack-col:nth-child(2) { transition-delay: 0.10s; }
+.ai-stack .stack-col:nth-child(3) { transition-delay: 0.20s; }
+.ai-stack .stack-col:nth-child(4) { transition-delay: 0.30s; }
+.ai-stack .stack-col:nth-child(5) { transition-delay: 0.40s; }
+.ai-stack .stack-col:nth-child(6) { transition-delay: 0.50s; }
+.stack-list li {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.stack-col.show .stack-list li { opacity: 1; transform: none; }
+.stack-col.show .stack-list li:nth-child(1) { transition-delay: 0.18s; }
+.stack-col.show .stack-list li:nth-child(2) { transition-delay: 0.26s; }
+.stack-col.show .stack-list li:nth-child(3) { transition-delay: 0.34s; }
+.stack-col.show .stack-list li:nth-child(4) { transition-delay: 0.42s; }
+.stack-col.show .stack-list li:nth-child(5) { transition-delay: 0.50s; }
+
 /* ====== PASSION CARDS ====== */
 .passion-grid {
   display: grid;
