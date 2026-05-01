@@ -1,10 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteRule ^$ ramesh_notebook_editorial.html [L,R=302]
+</IfModule>
 
-    # If a real file exists inside public/, serve it directly (CSS, JS, HTML, images)
-    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
-    RewriteRule ^(.*)$ public/$1 [L]
-
-    # Everything else goes straight to Laravel's front controller
-    RewriteRule ^(.*)$ public/index.php [L]
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
 </IfModule>
