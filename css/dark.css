@@ -474,6 +474,22 @@ section.block {
 .code-body .num { color: var(--accent4); }
 .code-body .com { color: var(--muted); font-style: italic; }
 .code-body .fn { color: var(--accent2); }
+.code-body .cl {
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.code-card.show .cl { opacity: 1; transform: none; }
+.code-card.show .cl:nth-child(1)  { transition-delay: 0.05s; }
+.code-card.show .cl:nth-child(2)  { transition-delay: 0.14s; }
+.code-card.show .cl:nth-child(3)  { transition-delay: 0.23s; }
+.code-card.show .cl:nth-child(4)  { transition-delay: 0.32s; }
+.code-card.show .cl:nth-child(5)  { transition-delay: 0.41s; }
+.code-card.show .cl:nth-child(6)  { transition-delay: 0.50s; }
+.code-card.show .cl:nth-child(7)  { transition-delay: 0.59s; }
+.code-card.show .cl:nth-child(8)  { transition-delay: 0.68s; }
+.code-card.show .cl:nth-child(9)  { transition-delay: 0.77s; }
+.code-card.show .cl:nth-child(10) { transition-delay: 0.86s; }
 
 /* ====== SKILLS GRID ====== */
 .skill-grid {
