@@ -1,3 +1,22 @@
+// Typing effect on hero name (single-line matrix style)
+(function typeHeroName() {
+  const title = document.getElementById('hero-name');
+  if (!title) return;
+  const text = title.getAttribute('data-text') || 'Ramesh Maharaddi';
+  title.textContent = '';
+  let i = 0;
+  const speed = 85;
+
+  function tick() {
+    if (i >= text.length) return;
+    title.textContent += text[i];
+    i++;
+    setTimeout(tick, speed);
+  }
+
+  setTimeout(tick, 240);
+})();
+
 // Typing effect on hero subtitle
 (function typeHero() {
   const target = document.getElementById('typed-target');
