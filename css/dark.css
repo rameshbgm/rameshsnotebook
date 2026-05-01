@@ -53,11 +53,63 @@ body::before {
   z-index: 9999;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg2); }
-::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* Scrollbar — vertical gradient using the brand palette */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track {
+  background: var(--bg2);
+  border-left: 1px solid var(--line);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff5f56 0%, #ffbd2e 18%, #27c93f 36%, #58a6ff 56%, #d2a8ff 76%, #ff7b72 100%);
+  border: 2px solid var(--bg2);
+  background-clip: padding-box;
+  border-radius: 6px;
+  min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover { border-width: 1px; }
+/* Firefox fallback (no gradient support — single accent colour) */
+html { scrollbar-color: var(--accent) var(--bg2); scrollbar-width: thin; }
+
+/* ====== SCROLL PROGRESS BAR (top, fixed, zero layout impact) ====== */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--bg3);
+  z-index: 999;
+  pointer-events: none;
+}
+.spb-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #ff5f56 0%, #ffbd2e 20%, #27c93f 40%, #58a6ff 60%, #d2a8ff 80%, #ff7b72 100%);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  will-change: transform;
+}
+.spb-badge {
+  position: fixed;
+  bottom: 14px;
+  left: 14px;
+  z-index: 99;
+  padding: 3px 8px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.spb-badge.visible { opacity: 1; transform: translateY(0); }
+@media (min-width: 600px) {
+  .spb-badge { bottom: 20px; left: 20px; font-size: 11px; padding: 4px 9px; }
+}
 
 /* ====== TITLEBAR — mobile base ====== */
 .titlebar {

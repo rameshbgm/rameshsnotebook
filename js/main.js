@@ -172,6 +172,40 @@ reveal.forEach(r => io.observe(r));
   toggleScrollBtn(); // Initial check
 }());
 
+// Scroll progress: thin top bar + linux-style percentage badge
+(function () {
+  const fill  = document.getElementById('spb-fill');
+  const badge = document.getElementById('spb-badge');
+  if (!fill || !badge) return;
+
+  const BAR_WIDTH = 10; // chars in the [████░░] visual
+
+  // TODO(you): write this function — see the comment block below the IIFE
+  function formatProgress(percent) {
+    const filled = Math.round((percent / 100) * BAR_WIDTH);
+    const empty  = BAR_WIDTH - filled;
+    return '[' + '█'.repeat(filled) + '░'.repeat(empty) + '] ' + Math.round(percent) + '%';
+  }
+
+  let ticking = false;
+  function update() {
+    const scrolled = window.scrollY;
+    const total    = document.documentElement.scrollHeight - window.innerHeight;
+    const percent  = total > 0 ? Math.min(100, Math.max(0, (scrolled / total) * 100)) : 0;
+
+    fill.style.transform = 'scaleX(' + (percent / 100) + ')';
+    badge.textContent    = formatProgress(percent);
+    badge.classList.toggle('visible', scrolled > 80);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}());
+
 // Theme toggle (dark <-> light) using stylesheet swap
 (function () {
   const themeLink = document.getElementById('theme-style');
