@@ -672,6 +672,54 @@ footer {
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
 .reveal.show { opacity: 1; transform: translateY(0); }
 
+/* ────── VERSION SELECTOR ────── */
+.titlebar-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.version-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.version-label {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.version-dropdown {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 400;
+  appearance: none;
+}
+.version-dropdown:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.version-dropdown:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 255, 156, 0.1);
+}
+.version-dropdown option {
+  color: var(--text);
+  background: var(--bg);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; }
@@ -694,6 +742,13 @@ footer {
   </div>
   <div class="tb-title">~/<span>rameshsnotebook</span> — zsh — 120×40</div>
   <div class="tb-actions">
+    <div class="version-selector">
+      <label for="versionSwitch" class="version-label">ver</label>
+      <select id="versionSwitch" class="version-dropdown" title="Switch between portfolio versions">
+        <option value="editorial">v1.0 editorial</option>
+        <option value="terminal">v2.0 terminal</option>
+      </select>
+    </div>
     <a href="https://www.linkedin.com/in/rameshbgm/" class="tb-link" target="_blank" rel="noopener noreferrer">linkedin</a>
     <a href="https://github.com/rameshbgm/" class="tb-link" target="_blank" rel="noopener noreferrer">github</a>
   </div>
@@ -1345,6 +1400,33 @@ if (subtitle) {
     subtitle.style.opacity = '1';
   }, 600);
 }
+
+// Version Selector
+document.addEventListener('DOMContentLoaded', () => {
+  const versionSwitch = document.getElementById('versionSwitch');
+  if (!versionSwitch) return;
+
+  // Set current version
+  versionSwitch.value = 'terminal';
+
+  // Handle version change
+  versionSwitch.addEventListener('change', (e) => {
+    const version = e.target.value;
+    localStorage.setItem('notebookVersion', version);
+
+    if (version === 'editorial') {
+      window.location.href = './ramesh_notebook_editorial.html';
+    } else {
+      window.location.href = './ramesh_notebook_terminal.html';
+    }
+  });
+
+  // Restore saved preference if switching back
+  const savedVersion = localStorage.getItem('notebookVersion');
+  if (savedVersion && savedVersion !== 'terminal') {
+    versionSwitch.value = savedVersion;
+  }
+});
 </script>
 
 </body>
