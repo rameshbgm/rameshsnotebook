@@ -5,14 +5,14 @@
     # [0-3] = 40% editorial  [4-6] = 30% terminal  [7-9] = 30% portfolio
     RewriteCond %{REQUEST_URI} ^/$
     RewriteCond %{TIME_SEC}    [0-3]$
-    RewriteRule ^               ramesh_notebook_editorial.html [L,R=302]
+    RewriteRule ^               ramesh_notebook_editorial.html [L]
 
     RewriteCond %{REQUEST_URI} ^/$
     RewriteCond %{TIME_SEC}    [4-6]$
-    RewriteRule ^               ramesh_notebook_terminal.html [L,R=302]
+    RewriteRule ^               ramesh_notebook_terminal.html [L]
 
     RewriteCond %{REQUEST_URI} ^/$
-    RewriteRule ^               ramesh_portfolio.html [L,R=302]
+    RewriteRule ^               ramesh_portfolio.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>
