@@ -1,11 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # If the request is for a valid file or directory, skip the rewrite
-    RewriteCond %{REQUEST_FILENAME} -f [OR]
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^ - [L]
-
-    # Rewrite everything else to public/index.php
+    # If a real file exists inside public/, serve it directly (CSS, JS, HTML, images)
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
     RewriteRule ^(.*)$ public/$1 [L]
+
+    # Everything else goes straight to Laravel's front controller
+    RewriteRule ^(.*)$ public/index.php [L]
 </IfModule>
