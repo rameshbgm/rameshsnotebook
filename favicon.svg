@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ramesh's Notebook">
+  <rect width="64" height="64" rx="12" fill="#0d1117"/>
+  <polyline points="14,18 32,32 14,46" fill="none" stroke="#00ff9c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="38" y1="46" x2="52" y2="46" stroke="#00ff9c" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,4 +1,137 @@
+# ============================================================
+# robots.txt — rameshsnotebook.com
+# Aggressive SEO: allow all major search engines + AI crawlers
+# ============================================================
+
+# Default — allow everything
 User-agent: *
 Allow: /
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /*.log$
 
+# ---------- Major search engines ----------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Sogou
+Allow: /
+
+User-agent: Exabot
+Allow: /
+
+User-agent: facebot
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+# ---------- Social preview crawlers ----------
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+# ---------- AI / LLM crawlers ----------
+# Allowing these makes the site discoverable inside AI tools (ChatGPT search,
+# Perplexity, Claude search) — important for a portfolio. Switch any to
+# `Disallow: /` if you want to opt out of training/indexing for that bot.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# ---------- Sitemap ----------
 Sitemap: https://rameshsnotebook.com/sitemap.xml
+
+# Host directive (helps Yandex pick the canonical host)
+Host: https://rameshsnotebook.com
