@@ -50,6 +50,13 @@
     tick();
   }
 
+  // Pre-fill the full text to measure the final height, then lock it in.
+  // This reserves the exact space before typing starts so no reflow happens
+  // character-by-character.
+  target.textContent = subtitleSegments.map(s => s.text).join('');
+  const reservedH = subtitle.getBoundingClientRect().height;
+  subtitle.style.minHeight = reservedH + 'px';
+
   title.textContent = '';
   target.textContent = '';
   subtitle.style.opacity = '0';
@@ -102,31 +109,31 @@ reveal.forEach(r => io.observe(r));
 
 
 (function () {
-  const hamburger = document.getElementById('hamburger');
-  const sidebar   = document.getElementById('sidebar');
-  const overlay   = document.getElementById('sidebar-overlay');
+  const hamburger   = document.getElementById('hamburger');
+  const sidebar     = document.getElementById('sidebar');
+  const overlay     = document.getElementById('sidebar-overlay');
+  const closeBtn    = document.getElementById('sidebar-close');
 
   function open() {
     sidebar.classList.add('open');
     overlay.classList.add('open');
     hamburger.setAttribute('aria-expanded', 'true');
-    hamburger.setAttribute('aria-label', 'Close navigation');
-    hamburger.setAttribute('title', 'Close navigation');
     document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
   }
   function close() {
     sidebar.classList.remove('open');
     overlay.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-label', 'Open navigation');
-    hamburger.setAttribute('title', 'Open navigation');
     document.body.style.overflow = '';
+    hamburger.focus();
   }
 
   hamburger.addEventListener('click', function () {
     sidebar.classList.contains('open') ? close() : open();
   });
   overlay.addEventListener('click', close);
+  if (closeBtn) closeBtn.addEventListener('click', close);
 
   // Close when any sidebar link is tapped
   sidebar.querySelectorAll('a').forEach(function (a) {

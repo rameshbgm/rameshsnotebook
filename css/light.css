@@ -29,3 +29,11 @@ body::before {
     transparent 3px
   );
 }
+
+/* Light theme: ☀ is already visible — remove dark-mode glow */
+#theme-toggle {
+  filter: none;
+}
+#theme-toggle:hover {
+  filter: none;
+}
