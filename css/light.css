@@ -39,13 +39,14 @@ body::before {
 }
 
 /* Hero title — dark gradient for visibility on light bg */
-.hero-title {
+.hero-title,
+.hero-title .nc {
   background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 50%, #7c3aed 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 18px rgba(15, 118, 110, 0.18));
 }
+.hero-title { filter: drop-shadow(0 4px 18px rgba(15, 118, 110, 0.18)); }
 .hero-return { color: var(--accent); }
 
 /* Social icons — switch white-on-dark icons to dark-on-light */

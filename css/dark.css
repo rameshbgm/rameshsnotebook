@@ -389,23 +389,58 @@ main { padding: 0; }
 .hero-subtitle {
   font-family: 'MatrixCode', 'Courier New', 'VT323', 'JetBrains Mono', monospace;
   font-size: 13.5px;
-  line-height: 1.55;
+  line-height: 1.7;
   color: var(--muted);
-  margin-bottom: 48px;
-  max-width: 720px;
-  min-height: 4.6em;
+  margin: 0 auto 48px;
+  max-width: 100%;
+  text-align: left;
+  min-height: 10em;
   overflow: hidden;
   will-change: contents;
 }
 @media (min-width: 600px) {
-  .hero-subtitle { font-size: 17px; line-height: 1.6; margin-bottom: 56px; min-height: 3.4em; }
+  .hero-subtitle {
+    font-size: 16px; line-height: 1.75;
+    margin-bottom: 56px;
+    min-height: 5em;
+    max-width: 90%;            /* 5% inset each side via margin auto */
+  }
+}
+@media (min-width: 1024px) {
+  .hero-subtitle {
+    font-size: 17px;
+    max-width: 80%;            /* 10% inset each side via margin auto */
+  }
 }
 
-.hero-subtitle .h { color: var(--accent); }
-.hero-subtitle .tw { color: var(--text); font-weight: 600; }
-.hero-subtitle .ta { color: var(--accent); font-weight: 600; }
+.hero-subtitle .h  { color: var(--accent); }
+.hero-subtitle .tw { color: var(--text);    font-weight: 600; }
+.hero-subtitle .ta { color: var(--accent);  font-weight: 600; }
 .hero-subtitle .t2 { color: var(--accent2); font-weight: 600; }
 .hero-subtitle .t4 { color: var(--accent4); font-weight: 600; }
+
+/* ====== Name typing — smooth character-by-character with caret ====== */
+.hero-title { opacity: 0; transition: opacity .35s ease; }
+.hero-title.go { opacity: 1; }
+.name-caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.78em;
+  margin-left: 0.06em;
+  vertical-align: -0.06em;
+  background: var(--accent);
+  border-radius: 1px;
+  box-shadow: 0 0 8px var(--accent);
+  animation: name-caret-blink 0.85s step-end infinite;
+}
+@keyframes name-caret-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title { opacity: 1; transform: none; filter: none; animation: none; transition: none; }
+  .name-caret { animation: none; }
+}
 
 .type-caret {
   display: inline-block;
@@ -591,6 +626,8 @@ main { padding: 0; }
 .hm-item:nth-child(1) { --hm-color: var(--accent); }
 .hm-item:nth-child(2) { --hm-color: var(--accent2); }
 .hm-item:nth-child(3) { --hm-color: var(--accent4); }
+.hm-item:nth-child(4) { --hm-color: var(--warn); }
+.hm-item:nth-child(5) { --hm-color: var(--accent3); }
 @keyframes pulse {
   0%,100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.5); }

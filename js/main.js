@@ -1,39 +1,66 @@
-// Sequenced typing: hero name first, then subtitle
-(function typeHeroSequence() {
+// Hero reveal: smooth word-by-word stagger reveal with blur-defocus —
+// modern motion language inspired by Linear / Vercel / Apple intro pages.
+(function heroReveal() {
   const title = document.getElementById('hero-name');
   const target = document.getElementById('typed-target');
   const subtitle = document.getElementById('typed-subtitle');
   if (!title || !target || !subtitle) return;
 
   const nameText = title.getAttribute('data-text') || 'Ramesh Maharaddi';
-  const subtitleSegments = [
-    { text: '> ', cls: 'h' },
-    { text: 'Senior ', cls: '' },
-    { text: 'AI Engineer', cls: 'tw' },
-    { text: ' & Solution Designer. I build ', cls: '' },
-    { text: 'agentic systems', cls: 'ta' },
-    { text: ', ', cls: '' },
-    { text: 'RAG pipelines', cls: 't2' },
-    { text: ' and ', cls: '' },
-    { text: 'multi-agent platforms', cls: 't4' },
-    { text: ' that actually work in production.', cls: '' }
+
+  // Plain, human sentence. Tech keywords stay coloured for visual hierarchy.
+  const segments = [
+    { text: '> ',                                              cls: 'h'  },
+    { text: 'Senior ',                                         cls: ''   },
+    { text: 'Software Engineer',                               cls: 'tw' },
+    { text: ' & ',                                             cls: ''   },
+    { text: 'Solution Designer',                               cls: 'ta' },
+    { text: '. I build enterprise apps across ',               cls: ''   },
+    { text: 'UI',                                              cls: 't2' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'backend',                                         cls: 'ta' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'database',                                        cls: 't4' },
+    { text: ' and ',                                           cls: ''   },
+    { text: 'AI',                                              cls: 'ta' },
+    { text: '. Focused on ',                                   cls: ''   },
+    { text: 'Agentic AI',                                      cls: 'ta' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'Multi-Agent Systems',                             cls: 't4' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'Knowledge-based RAG',                             cls: 't2' },
+    { text: ' and ',                                           cls: ''   },
+    { text: 'MCP',                                             cls: 'ta' },
+    { text: '. Shipping production systems across ',           cls: ''   },
+    { text: 'Telecom',                                         cls: 't2' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'Banking',                                         cls: 'ta' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'Insurance',                                       cls: 't4' },
+    { text: ', ',                                              cls: ''   },
+    { text: 'Retail',                                          cls: 'ta' },
+    { text: ' and ',                                           cls: ''   },
+    { text: 'Fintech',                                         cls: 't2' },
+    { text: '.',                                               cls: ''   }
   ];
 
-  function typeSegments(el, segments, speed, onDone) {
+  // Linux-style fast char-by-char typing. Builds spans per coloured segment,
+  // appending a character every `speed` ms. Trailing whitespace lives
+  // inside the per-segment span so spaces render correctly between segments.
+  function typeSegments(el, parts, speed, onDone) {
+    el.innerHTML = '';
+    // Flatten segments into a stream of {ch, cls} so we can switch span
+    // whenever the colour class changes.
     const flat = [];
-    segments.forEach(s => {
-      for (const ch of s.text) flat.push({ ch, cls: s.cls || '' });
+    parts.forEach(p => {
+      for (const ch of p.text) flat.push({ ch, cls: p.cls || '' });
     });
 
     let i = 0;
     let currentSpan = null;
     let currentCls = null;
-
     function tick() {
-      if (i >= flat.length) {
-        if (onDone) onDone();
-        return;
-      }
+      if (i >= flat.length) { if (onDone) onDone(); return; }
       const { ch, cls } = flat[i];
       if (cls !== currentCls || !currentSpan) {
         currentSpan = document.createElement('span');
@@ -41,47 +68,62 @@
         el.appendChild(currentSpan);
         currentCls = cls;
       }
-      currentSpan.textContent += ch;
+      currentSpan.appendChild(document.createTextNode(ch));
       i++;
-      const delay = (ch === '.' || ch === ',') ? speed * 4 : speed;
-      setTimeout(tick, delay);
+      setTimeout(tick, speed);
     }
-
     tick();
   }
 
-  // Pre-fill the full text to measure the final height, then lock it in.
-  // This reserves the exact space before typing starts so no reflow happens
-  // character-by-character.
-  target.textContent = subtitleSegments.map(s => s.text).join('');
+  // Pre-fill the full sentence to measure final height, then reset, so
+  // typing doesn't push the meta + social rows down line-by-line.
+  target.textContent = segments.map(s => s.text).join('');
   const reservedH = subtitle.getBoundingClientRect().height;
   subtitle.style.minHeight = reservedH + 'px';
 
+  // Reset both name and subtitle to empty before sequencing.
   title.textContent = '';
   target.textContent = '';
-  subtitle.style.opacity = '0';
+
+  // Smooth character-by-character typing for the name with a blinking caret.
+  function revealName(text, onDone) {
+    title.textContent = '';
+    title.classList.add('go');     // makes title visible
+    const caret = document.createElement('span');
+    caret.className = 'name-caret';
+    title.appendChild(caret);
+
+    const speed = 65;              // ms per char — calm, deliberate
+    let i = 0;
+    function tick() {
+      if (i >= text.length) {
+        // Hold caret briefly then remove.
+        setTimeout(() => caret.remove(), 320);
+        if (onDone) onDone();
+        return;
+      }
+      title.insertBefore(document.createTextNode(text[i]), caret);
+      i++;
+      setTimeout(tick, speed);
+    }
+    tick();
+  }
 
   setTimeout(() => {
-    typeSegments(
-      title,
-      [{ text: nameText, cls: '' }],
-      26,
-      () => {
-        const returnIcon = document.createElement('span');
-        returnIcon.className = 'hero-return';
-        returnIcon.textContent = ' ↵';
-        title.appendChild(returnIcon);
-
-        setTimeout(() => {
-          subtitle.style.opacity = '1';
-          typeSegments(target, subtitleSegments, 26, () => {
-            const caret = document.querySelector('.type-caret');
-            if (caret) caret.classList.add('done');
-          });
-        }, 320);
-      }
-    );
-  }, 450);
+    revealName(nameText, () => {
+      const returnIcon = document.createElement('span');
+      returnIcon.className = 'hero-return';
+      returnIcon.textContent = ' ↵';
+      title.appendChild(returnIcon);
+      // Kick off Linux-style fast typing after a short pause.
+      setTimeout(() => {
+        typeSegments(target, segments, 14, () => {
+          const caret = document.querySelector('.type-caret');
+          if (caret) caret.classList.add('done');
+        });
+      }, 200);
+    });
+  }, 280);
 })();
 
 // Measure titlebar height and set CSS var so tabs stick exactly below it
