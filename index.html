@@ -518,9 +518,14 @@ main { padding: 0; }
 
 /* ────── HERO / TERMINAL ────── */
 .hero {
-  padding: 60px 40px;
+  min-height: 100vh;
+  padding: var(--titlebar-h, 41px) 40px 60px;
   border-bottom: 1px solid var(--line);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 .term-prompt {
   font-size: 13px;
@@ -1079,7 +1084,7 @@ footer {
   .sidebar.open { transform: translateX(0); }
   .ai-stack { grid-template-columns: 1fr; }
   .web-list { grid-template-columns: 1fr; }
-  .hero { padding: 40px 20px; }
+  .hero { padding: var(--titlebar-h, 41px) 20px 40px; min-height: 100dvh; }
   section.block { padding: 40px 20px; }
   .scroll-to-top { bottom: 16px; right: 16px; }
 }
@@ -1152,6 +1157,13 @@ footer {
 
     <!-- HERO -->
     <section class="hero">
+      <div class="hero-dots" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
       <div class="term-prompt">
         <span>ramesh@rameshsnotebook</span> <span class="arrow">~</span> $ whoami --verbose
       </div>
@@ -1198,6 +1210,13 @@ footer {
           </a>
         </div>
       </div>
+      <a href="#about" class="hero-scroll-cue" aria-label="Scroll to about section">
+        <span class="hsc-arrow">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v11M3.5 8.5L8 13l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
     </section>
 
     <!-- ABOUT -->
@@ -1783,6 +1802,7 @@ footer {
 // Measure titlebar height and set CSS var so tabs stick exactly below it
 function syncTitlebarHeight() {
   const tb = document.querySelector('.titlebar');
+  const hero = document.querySelector('.hero');
   if (!tb) return;
   const h = Math.round(tb.getBoundingClientRect().height);
   document.documentElement.style.setProperty('--titlebar-h', h + 'px');
