@@ -10,7 +10,7 @@
     { text: '> ', cls: 'h' },
     { text: 'Senior ', cls: '' },
     { text: 'AI Engineer', cls: 'tw' },
-    { text: ' & Solution Architect. I build ', cls: '' },
+    { text: ' & Solution Designer. I build ', cls: '' },
     { text: 'agentic systems', cls: 'ta' },
     { text: ', ', cls: '' },
     { text: 'RAG pipelines', cls: 't2' },
@@ -220,7 +220,7 @@ reveal.forEach(r => io.observe(r));
 
   function setTheme(theme) {
     const nextTheme = theme === 'light' ? 'light' : 'dark';
-    themeLink.setAttribute('href', THEMES[nextTheme]);
+    themeLink.setAttribute('href', THEMES[nextTheme] + '?v=' + Date.now());
     themeToggle.setAttribute(
       'aria-label',
       nextTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
