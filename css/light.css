@@ -54,3 +54,22 @@ body::before {
 .cta-social .btn.icon:nth-child(3) { color: #000000; }                                /* X */
 .cta-social .btn.icon:nth-child(2):hover { border-color: #181717; box-shadow: 0 6px 20px -6px rgba(24,23,23,.35);  background: rgba(24,23,23,.06); }
 .cta-social .btn.icon:nth-child(3):hover { border-color: #000000; box-shadow: 0 6px 20px -6px rgba(0,0,0,.35);     background: rgba(0,0,0,.06); }
+
+/* Sidebar drawer scrim — softer for light bg */
+.sidebar-overlay { background: rgba(15, 23, 42, 0.35); }
+
+/* Hero radial gradients + grid lines tuned for light bg */
+.hero {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 30%, rgba(15, 118, 110, 0.10), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(29, 78, 216, 0.08),  transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(124, 58, 237, 0.06), transparent 60%);
+}
+.hero::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+/* Frosted social tile in light bg */
+.btn.icon { border-color: rgba(15, 23, 42, 0.12); }
